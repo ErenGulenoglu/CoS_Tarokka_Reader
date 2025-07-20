@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Dungeon Master Results</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="./output.css" rel="stylesheet" />
+	</head>
+	<body class="bg-[#FAF9F6] min-h-screen flex flex-col font-roboto">
+		<div class="flex flex-col w-full justify-center items-center bg-[#fff] lg:justify-start lg:flex-row shadow-[0_0.25em_0.75em_rgba(0,0,0,0.12)]">
+			<div class="flex w-full justify-center items bg-center lg:w-[15%]">
+				<h1 class="font-roboto font-bold text-[#8b0000] text-3xl p-[1em] lg:pl-[2em]"><a href="index.html">Madam Eva</a></h1>
+			</div>
+			<div class="flex w-full justify-center items-center lg:justify-end">
+				<ul class="flex flex-col w-full justify-center items-center lg:gap-[10em] lg:flex-row lg:w-auto">
+					<li class="flex w-full justify-center items-center border-t-1 border-black transition-colors duration-400 hover:bg-[#FAF9F6] lg:border-0 lg:w-auto lg:p-[0.5em]">
+						<p class="font-roboto text-[#800000] text-xl whitespace-nowrap"><a href="tarot.html">Make a Reading</a></p>
+					</li>
+					<li class="flex w-full justify-center items-center border-t-1 border-black transition-colors duration-400 hover:bg-[#FAF9F6] lg:border-0 lg:w-auto lg:p-[0.5em]">
+						<p class="font-roboto text-[#800000] text-xl whitespace-nowrap"><a href="dm_results.html" onclick="">DM Results</a></p>
+					</li>
+					<li class="hidden lg:mr-[15em] lg:flex">
+						<a href="https://github.com/ErenGulenoglu?tab=repositories" target="_blank">
+							<div class="group relative">
+								<button class="cursor-pointer">
+									<svg
+										stroke-linejoin="round"
+										stroke-linecap="round"
+										stroke-width="2"
+										stroke="currentColor"
+										fill="none"
+										viewBox="0 0 24 24"
+										class="w-8 hover:scale-125 duration-200 hover:stroke-[#800000]"
+									>
+										<path
+											d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+										></path>
+									</svg>
+								</button>
+								<span
+									class="absolute -bottom-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
+									>GitHub<span> </span
+								></span>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<main class="mt-[3em] mb-[3em] lg:mt-[7em] lg:mb-[7em]">
+			<div class="flex justify-center items-center w-full p-6">
+				<div class="flex flex-col lg:flex-row w-full lg:w-[65%] bg-white rounded-2xl overflow-hidden shadow-[0_0.25em_0.75em_rgba(0,0,0,0.15),0_-0.25em_0.75em_rgba(0,0,0,0.07)]">
+					<!-- Left Image -->
+					<div class="flex justify-center items-center bg-white p-6">
+						<img
+							id="tarokka-card"
+							src="#"
+							alt="Tarokka Card"
+							class="w-[16em] h-auto object-cover rounded-lg shadow-[inset_0_0.125em_0.25em_rgba(255,255,255,0.4),inset_0_-0.125em_0.25em_rgba(0,0,0,0.1),0_0.25em_0.75em_rgba(0,0,0,0.15),0_-0.25em_0.75em_rgba(0,0,0,0.07)] bg-gradient-to-br from-gray-100 to-gray-200"
+						/>
+					</div>
+
+					<!-- Center Text Content -->
+					<div class="flex flex-col justify-c items-start w-full lg:max-w-[40em]">
+						<div class="flex flex-col justify-start bg-white p-[2em] space-y-[0.5em] lg:h-[23em] lg:mb-[0.5em]">
+							<h2 id="item-card" class="text-3xl font-bold text-[#800000]">Item - Card</h2>
+							<p id="card-info" class="w-full">The treasure lies on the top floor of Van Richten's Tower (chapter 11, area V7).</p>
+							<p id="ai-response" class="w-full">Loading...</p>
+						</div>
+						<div class="flex flex-row w-full justify-center items-center gap-x-[1em]">
+							<button id="previous-button" onclick="previousCard()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[0.5em] px-[1.3em] rounded">Back</button>
+							<button id="next-button" onclick="nextCard()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[0.5em] px-[1.3em] rounded">Next</button>
+						</div>
+					</div>
+
+					<!-- Right Image -->
+					<div class="flex justify-center items-center bg-white p-6">
+						<img src="assets/characters/Rictavio.webp" alt="Rictavio" class="w-[11em] h-auto object-cover rounded" />
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="flex-grow h-[8em] flex justify-center items-center bg-[#fff] lg:justify-start lg:pl-[8em] shadow-[0_-0.25em_0.75em_rgba(0,0,0,0.1)]">
+			Enjoy playing Curse of Strahd!
+			<a class="lg:hidden ml-[2em]" href="https://github.com/ErenGulenoglu?tab=repositories" target="_blank">
+				<div class="group relative">
+					<button class="cursor-pointer">
+						<svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" class="w-8 hover:scale-125 duration-200 hover:stroke-[#800000]">
+							<path
+								d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+							></path>
+						</svg>
+					</button>
+					<span
+						class="absolute -bottom-14 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
+						>GitHub<span> </span
+					></span>
+				</div>
+			</a>
+		</footer>
+		<script src="javascript.js" defer></script>
+	</body>
+</html>

@@ -8,8 +8,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="./output.css" rel="stylesheet" />
 	</head>
-	<body class="bg-[#fff] min-h-screen flex flex-col font-roboto">
-		<div class="flex flex-col w-full justify-center items-center border-b-1 border-black lg:justify-start lg:flex-row">
+	<body class="bg-[#FAF9F6] min-h-screen flex flex-col font-roboto">
+		<div class="flex flex-col w-full justify-center items-center bg-[#fff] lg:justify-start lg:flex-row shadow-[0_0.25em_0.75em_rgba(0,0,0,0.12)]">
 			<div class="flex w-full justify-center items bg-center lg:w-[15%]">
 				<h1 class="font-roboto font-bold text-[#8b0000] text-3xl p-[1em] lg:pl-[2em]"><a href="index.html">Madam Eva</a></h1>
 			</div>
@@ -17,6 +17,9 @@
 				<ul class="flex flex-col w-full justify-center items-center lg:gap-[10em] lg:flex-row lg:w-auto">
 					<li class="flex w-full justify-center items-center border-t-1 border-black transition-colors duration-400 hover:bg-[#FAF9F6] lg:border-0 lg:w-auto lg:p-[0.5em]">
 						<p class="font-roboto text-[#800000] text-xl whitespace-nowrap"><a href="tarot.html">Make a Reading</a></p>
+					</li>
+					<li class="flex w-full justify-center items-center border-t-1 border-black transition-colors duration-400 hover:bg-[#FAF9F6] lg:border-0 lg:w-auto lg:p-[0.5em]">
+						<p class="font-roboto text-[#800000] text-xl whitespace-nowrap"><a href="#" onclick="viewDMResults()">DM Results</a></p>
 					</li>
 					<li class="hidden lg:mr-[15em] lg:flex">
 						<a href="https://github.com/ErenGulenoglu?tab=repositories" target="_blank">
@@ -48,14 +51,16 @@
 		</div>
 		<main class="mt-[3em] mb-[3em] lg:mt-[7em] lg:mb-[7em]">
 			<div class="flex flex-col justify-center items-center w-full">
-				<div class="flex flex-col justify-center items-stretch lg:flex-row shadow-xl shadow-gray-400/30 rounded-2xl overflow-hidden">
-					<div class="flex flex-col justify-center items-center bg-[#FAF9F6]">
+				<div
+					class="flex flex-col justify-center items-stretch lg:flex-row rounded-2xl overflow-hidden shadow-[inset_0_0.125em_0.25em_rgba(255,255,255,0.4),inset_0_-0.125em_0.25em_rgba(0,0,0,0.1),0_0.25em_0.75em_rgba(0,0,0,0.15),0_-0.25em_0.75em_rgba(0,0,0,0.07)] bg-gradient-to-br from-gray-100 to-gray-200"
+				>
+					<div class="flex flex-col justify-center items-center bg-[#fff]">
 						<img src="assets/Madame_Eva.webp" alt="Madame Eva" class="w-[20em] h-[20em] mx-[3em] mt-[3em] rounded-full object-cover" />
 						<h3 class="text-2xl text-[#800000] font-roboto font-bold mt-[0.8em]">Madam Eva</h3>
 						<p class="font-roboto mt-[0.5em] mb-[0.5em]">Vistana Crone, Fortune Teller</p>
 						<p class="font-sans italic mb-[1em]">"At last you have arrived!"</p>
 					</div>
-					<div class="flex flex-col font-roboto bg-white items-start w-full lg:w-[40em] h-full">
+					<div class="flex flex-col font-roboto bg-white items-start w-full lg:w-[40em]">
 						<div class="flex flex-col ml-[2em]">
 							<h2 class="font-roboto text-3xl font-bold text-[#800000] mt-[1em]">End Strahd's Curse</h2>
 						</div>
@@ -91,8 +96,25 @@
 					</ul>
 				</div>
 			</div>
+			<div id="dmResultsWarningSpoiler" class="hidden fixed flex flex-col top-0 left-0 w-screen h-screen justify-center items-center z-50 bg-black/20">
+				<div class="flex flex-col justify-center items-center rounded-2xl bg-white pointer-events-auto p-[3em] gap-y-[2em]">
+					<p class="texl-lg font-roboto rounded-3xl bg-white pointer-events-auto">This will reveal spoilers for the players in Curse of Strahd. Are you sure you want to continue?</p>
+					<div class="flex flex-row justify-center items-center gap-x-[1em]">
+						<button onclick="dmResultContinue()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[0.5em] px-[1.3em] rounded">Continue</button>
+						<button onclick="dmResultGoBack()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[0.5em] px-[1.3em] rounded">Go Back</button>
+					</div>
+				</div>
+			</div>
+			<div id="dmResultsWarningEmpty" class="hidden fixed flex flex-col top-0 left-0 w-screen h-screen justify-center items-center z-50 bg-black/20">
+				<div class="flex flex-col justify-center items-center rounded-2xl bg-white pointer-events-auto p-[3em] gap-y-[2em]">
+					<p class="texl-lg font-roboto rounded-3xl bg-white pointer-events-auto">You have not saved any results yet. Please save your tarot reading first.</p>
+					<div class="flex flex-row justify-center items-center gap-x-[1em]">
+						<button onclick="dmResultWarningEmpty()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-[0.5em] px-[1.3em] rounded">Ok</button>
+					</div>
+				</div>
+			</div>
 		</main>
-		<footer class="flex-grow h-[8em] border-t border-black flex justify-center items-center lg:justify-start lg:pl-[8em]">
+		<footer class="flex-grow h-[8em] flex justify-center items-center bg-[#fff] lg:justify-start lg:pl-[8em] shadow-[0_-0.25em_0.75em_rgba(0,0,0,0.1)]">
 			Enjoy playing Curse of Strahd!
 			<a class="lg:hidden ml-[2em]" href="https://github.com/ErenGulenoglu?tab=repositories" target="_blank">
 				<div class="group relative">
@@ -110,6 +132,6 @@
 				</div>
 			</a>
 		</footer>
-		<script src="javascript.js"></script>
+		<script src="javascript.js" defer></script>
 	</body>
 </html>
